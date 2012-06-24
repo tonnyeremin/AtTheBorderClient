@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
+  <App xmlns="" ProductID="{094325ae-bc62-4371-a25b-cffcfafd8632}"
+       Title="At the border" RuntimeType="Silverlight" Version="1.1.0.0" Genre="apps.normal" 
+       Author="Anton Eremin" 
+       Description="Unofficial mobile client for russian web service nagranitce.ru. Shows traffic and average waiting time at russian-finnish border." 
+       Publisher="Anton Eremin">
+    <IconPath IsRelative="true" IsResource="false">Images\AppIcon.png</IconPath>
+    <Capabilities>
+      <Capability Name="ID_CAP_NETWORKING" />
+    </Capabilities>
+    <Tasks>
+      <DefaultTask Name="_default" NavigationPage="MainPage.xaml" />
+    </Tasks>
+    <Tokens>
+      <PrimaryToken TokenID="onboardToken" TaskName="_default">
+        <TemplateType5>
+          <BackgroundImageURI IsRelative="true" IsResource="false">Images\TileIcon.png</BackgroundImageURI>
+          <Count>0</Count>
+          <Title>At the border</Title>
+        </TemplateType5>
+      </PrimaryToken>
+    </Tokens>
+  </App>
+</Deployment>
