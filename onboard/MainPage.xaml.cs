@@ -18,8 +18,9 @@ namespace Onboard
     {
         public MainPage()
         {
-            InitializeComponent();
             DataContext = App.ViewModel;
+            InitializeComponent();
+           
         }
 
         private void ai_About_Click(object sender, EventArgs e)

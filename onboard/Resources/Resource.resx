@@ -183,4 +183,19 @@
   <data name="Release" xml:space="preserve">
     <value>Release</value>
   </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Feedback</value>
+  </data>
+  <data name="Rate" xml:space="preserve">
+    <value>Rate our application</value>
+  </data>
+  <data name="SendRequest" xml:space="preserve">
+    <value>Send feature request</value>
+  </data>
+  <data name="Support" xml:space="preserve">
+    <value>Support</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
 </root>

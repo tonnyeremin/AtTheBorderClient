@@ -76,7 +76,11 @@
     </Compile>
     <Compile Include="Client.cs" />
     <Compile Include="Commands.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="ControlPointState.cs" />
+    <Compile Include="Controls\IconButton.xaml.cs">
+      <DependentUpon>IconButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ExtendedListBox.xaml.cs">
       <DependentUpon>ExtendedListBox.xaml</DependentUpon>
     </Compile>
@@ -98,6 +102,8 @@
     </Compile>
     <Compile Include="StorageHelper.cs" />
     <Compile Include="Utils.cs" />
+    <Compile Include="ViewModels\AboutViewModel.cs" />
+    <Compile Include="ViewModels\SendModel.cs" />
     <Compile Include="Views\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
@@ -114,6 +120,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Controls\IconButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ExtendedListBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -132,6 +142,16 @@
     <None Include="Properties\WMAppManifest.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\f120.png" />
+    <Content Include="Images\favs.png" />
+    <Content Include="Images\mail.png" />
+    <Resource Include="Images\vk120.png" />
+    <Content Include="Microsoft.Phone.Controls.Toolkit.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Newtonsoft.Json.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Images\AppIcon.png" />
     <Content Include="Images\send_white.png" />
     <Resource Include="Images\TileIcon.png" />

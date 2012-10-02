@@ -18,6 +18,7 @@ namespace Onboard
     {
         private readonly Action<object> _Execute;
         private readonly Predicate<object> _CanExecute;
+        private readonly object _Param;
     
         public DelegateCommand(Action<object> execute, Predicate<object> canExecute)
         {

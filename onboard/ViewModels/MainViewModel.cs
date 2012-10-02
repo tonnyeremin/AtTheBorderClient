@@ -17,6 +17,7 @@ using System.Net;
 using System.IO;
 using System.Windows.Threading;
 using System.Windows.Navigation;
+using Onboard.ViewModels;
 
 
 namespace Onboard
@@ -59,7 +60,78 @@ namespace Onboard
             _UpdateTrafficCommand = new DelegateCommand(new Action<object>(UpdateTraffic));
             _UpdateJournalCommand = new DelegateCommand(new Action<object>(UpdateJournal));
             _GetPrevious = new DelegateCommand(new Action<object>(GetJoutnalPrevious));
+            _SendCommand = new DelegateCommand(new Action<object>(Send));
+
         }
+
+        private AboutViewModel _About;
+
+        public AboutViewModel About
+        {
+            get
+            {
+                if (_About == null)
+                    _About = new AboutViewModel();
+                return _About;
+            }
+        }
+
+        private int _SelectedCountry = 0;
+
+        public int SelectedCountry
+        {
+            get { return _SelectedCountry; }
+            set
+            {
+                _SelectedCountry = value;
+                NotifyPropertyChanged("SelectedCountry");
+            }
+        }
+        private int _SelectedPost = 0;
+
+        public int SelectedPost
+        {
+            get { return _SelectedPost; }
+            set
+            {
+                _SelectedPost = value;
+                NotifyPropertyChanged("SelectedPost");
+            }
+        }
+        private int _CarNums;
+
+        public int CarNums
+        {
+            get { return _CarNums; }
+            set
+            {
+                _CarNums = value;
+                NotifyPropertyChanged("CarNums");
+            }
+        }
+        private string _Message;
+
+        public string Message
+        {
+            get { return _Message; }
+            set
+            {
+                _Message = value;
+                NotifyPropertyChanged("Message");
+            }
+        }
+        private string _Author;
+
+        public string Author
+        {
+            get { return _Author; }
+            set
+            {
+                _Author = value;
+                NotifyPropertyChanged("Author");
+            }
+        }
+
         #region Public Properties
         private List<CrossingPoint> _ToRussia;
         /// <summary>
@@ -110,18 +182,6 @@ namespace Onboard
             }
         }
 
-        private string _Author;
-
-        public string Author
-        {
-            get { return _Author; }
-            set
-            {
-                _Author = value;
-                NotifyPropertyChanged("Author");
-            }
-        }
-
         private bool _IsUpdating;
 
         public bool IsUpdating
@@ -156,6 +216,9 @@ namespace Onboard
                 needUpdate = _ToRussia.Count == 0;
                 Journal = data.Journal;
                 needUpdate = _Journal.Count == 0;
+                Author = data.Author;
+                SelectedCountry = data.SelectedCountry;
+                SelectedPost = data.SelectedCity;
             }
             else
             {
@@ -193,6 +256,18 @@ namespace Onboard
             App.Client.GetJournal(index);
         }
 
+        private void RunAppReview(object param)
+        {
+            Microsoft.Phone.Tasks.MarketplaceReviewTask task = new Microsoft.Phone.Tasks.MarketplaceReviewTask();
+            task.Show();
+        }
+
+        private void Send(object param)
+        {
+            App.Client.SendInfo(this);
+        }
+
+      
         #region INotifyPropertyChanged
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -237,6 +312,20 @@ namespace Onboard
         {
             get { return _GetPrevious; }
         }
+
+        private DelegateCommand _SelectionChangedCommand;
+        public ICommand SelectionChangedCommand
+        {
+            get { return _SelectionChangedCommand; }
+        }
+
+        private DelegateCommand _SendCommand;
+        public ICommand SendCommand
+        {
+            get { return _SendCommand; }
+        }
+
+
 
         #endregion
 

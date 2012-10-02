@@ -152,7 +152,7 @@
     <phone:PhoneApplicationPage.FontSize>
         <StaticResource ResourceKey="PhoneFontSizeNormal"/>
     </phone:PhoneApplicationPage.FontSize>-->
-    
+
     <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -178,6 +178,22 @@
                 <local:ExtendedListBox ItemsSource="{Binding ToRussia}" 
                                        ItemTemplate="{StaticResource CrossingPointTemplate}" 
                                        LoadHead="{Binding Path=UpdateTrafficCommand}"/>
+            </controls:PivotItem>
+            <controls:PivotItem Header="{Binding Path=Resources.Send, Source={StaticResource LR}}" >
+                <StackPanel Orientation="Vertical">
+                    <toolkit:ListPicker>
+                        <toolkit:ListPickerItem Content="{Binding Path=Resources.FromRussiaTabHeader, Source={StaticResource LR}}"/>
+                        <toolkit:ListPickerItem Content="{Binding Path=Resources.ToRussiaTabHeader, Source={StaticResource LR}}"/>
+                    </toolkit:ListPicker>
+                    <toolkit:ListPicker>
+                        <toolkit:ListPickerItem Content="{Binding Path=Resources.Brusnichnoe, Source={StaticResource LR}}"/>
+                        <toolkit:ListPickerItem Content="{Binding Path=Resources.Torfynovka, Source={StaticResource LR}}"/>
+                        <toolkit:ListPickerItem Content="{Binding Path=Resources.Svetogorsk, Source={StaticResource LR}}"/>
+                    </toolkit:ListPicker>
+                    <TextBox Text=""/>
+                    <Button Command="{Binding Path=SendCommand}"
+                        Content="{Binding Path=Resources.Send, Source={StaticResource LR}}"/>
+                </StackPanel>
             </controls:PivotItem>
             <controls:PivotItem Header="{Binding Path=Resources.Journal, Source={StaticResource LR}}">
                 <local:ExtendedListBox ItemsSource="{Binding Journal}" 

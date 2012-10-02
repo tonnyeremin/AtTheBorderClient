@@ -96,6 +96,9 @@ namespace Onboard
             ToRussia = model.ToRussia;
             FromRussia = model.FromRussia;
             Journal = model.Journal;
+            SelectedCountry = model.SelectedCountry;
+            SelectedCity = model.SelectedPost;
+            Author = model.Author;
         }
         /// <summary>
         /// 
@@ -109,5 +112,11 @@ namespace Onboard
         /// 
         /// </summary>
         public List<JournalItemInfo> Journal { get; set; }
+
+        public int SelectedCountry { get; set; }
+
+        public int SelectedCity { get; set; }
+
+        public string Author { get; set; }
     }
 }

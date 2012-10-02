@@ -183,4 +183,19 @@
   <data name="Release" xml:space="preserve">
     <value>Отпустите</value>
   </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Оставить отзыв</value>
+  </data>
+  <data name="Rate" xml:space="preserve">
+    <value>Оцените наше приложение</value>
+  </data>
+  <data name="SendRequest" xml:space="preserve">
+    <value>Предложения по улучшениею работы</value>
+  </data>
+  <data name="Support" xml:space="preserve">
+    <value>Поддержка</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Отправить</value>
+  </data>
 </root>

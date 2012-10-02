@@ -32,6 +32,8 @@ namespace Onboard
         public HttpWebResponse AsyncResponse { get; set; }
 
         public int UpdateMode { get; set; }
+
+        public string Data { get; set; }
     }
     /// <summary>
     /// 
@@ -144,6 +146,24 @@ namespace Onboard
             set { _Message = value; }
         }
     }
+
+    public delegate void SendEventHandler(object sender, SendEventArgs e);
+
+    public class SendEventArgs : EventArgs
+    {
+        private bool _Successed;
+
+        public bool Successed
+        {
+            get { return _Successed; }
+            set { _Successed = value; }
+        }
+
+        public SendEventArgs(bool succesed)
+        {
+            _Successed = succesed;
+        }
+    }
     /// <summary>
     /// 
     /// </summary>
@@ -165,6 +185,41 @@ namespace Onboard
         /// 
         /// </summary>
         public event ClientExeptionHandler OnClientException;
+
+        public event SendEventHandler OnSend;
+
+        public void SendInfo(MainViewModel model)
+        {
+            UriBuilder fullUri = new UriBuilder(SEND_INFO);
+            HttpWebRequest Request = (HttpWebRequest)WebRequest.Create(fullUri.Uri);
+            Request.ContentType = "application/x-www-form-urlencoded";
+            Request.Method = "POST";
+            Request.UserAgent = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.79 Safari/537.4";
+            RequestUpdateState forecastState = new RequestUpdateState();
+            forecastState.UpdateMode = 0;
+            forecastState.AsyncRequest = Request;
+            forecastState.Data = "direction=0&point=0&number=1&lenght=&comment=Пусто&author=trackmonster";
+            Request.BeginGetRequestStream(RequestReady, forecastState);
+
+            Request.BeginGetResponse(new AsyncCallback(HandleSendResponce), forecastState);
+
+        }
+
+        private void RequestReady(IAsyncResult result)
+        {
+            RequestUpdateState state = result.AsyncState as RequestUpdateState;
+            HttpWebRequest request = state.AsyncRequest;
+            Stream stream = request.EndGetRequestStream(result);
+            Deployment.Current.Dispatcher.BeginInvoke(delegate()
+            {
+                StreamWriter writer = new StreamWriter(stream);
+                writer.WriteLine(state.Data);
+                writer.Flush();
+                writer.Close();
+                request.BeginGetResponse(HandleStateResponse, state);
+            });
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -283,7 +338,7 @@ namespace Onboard
                 //Get from Russia traffic.
                 token = (JObject)root[0];
                 GetCrossingPoint(token, ref point, CrossingPointName.Torfynovka);
-               // point.Coordinates = GeoConstants.Torfyanovka;
+                // point.Coordinates = GeoConstants.Torfyanovka;
                 point.Direction = CrossingDirection.FromRussia;
                 fromRussia.Add(point);
                 GetCrossingPoint(token, ref point, CrossingPointName.Brusnichnoe);
@@ -299,7 +354,7 @@ namespace Onboard
                 token = (JObject)root[1];
                 GetCrossingPoint(token, ref point, CrossingPointName.Torfynovka);
                 point.Direction = CrossingDirection.ToRussia;
-               // point.Coordinates = GeoConstants.Torfyanovka;
+                // point.Coordinates = GeoConstants.Torfyanovka;
                 toRussia.Add(point);
                 GetCrossingPoint(token, ref point, CrossingPointName.Brusnichnoe);
                 point.Direction = CrossingDirection.ToRussia;
@@ -314,6 +369,38 @@ namespace Onboard
             catch (Exception ex)
             {
                 RaiseClientExeption(new ClientExeptionEventArgs("Updating traffic failed.", ex));
+            }
+        }
+
+        private void HandleSendResponce(IAsyncResult asyncResult)
+        {
+            Stream streamResult;
+            string str;
+            try
+            {
+                RequestUpdateState state = (RequestUpdateState)asyncResult.AsyncState;
+                HttpWebRequest request = (HttpWebRequest)state.AsyncRequest;
+
+                state.AsyncResponse = (HttpWebResponse)request.EndGetResponse(asyncResult);
+
+                streamResult = state.AsyncResponse.GetResponseStream();
+                using (StreamReader reader = new StreamReader(streamResult))
+                {
+                    str = reader.ReadToEnd();
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void RaiseOnSend(SendEventArgs args)
+        {
+            if (OnSend != null)
+            {
+                OnSend(this, args);
             }
         }
 
@@ -366,6 +453,7 @@ namespace Onboard
         private readonly string GET_TEN_LAST_JOURNAL_ITEMS = "http://api.nagranitse.ru/journal.json";
         private readonly string GET_CURRENT_STATE = "http://api.nagranitse.ru/data.json";
         private readonly string GET_NEXT_JOURNAL_ITEMS = "http://api.nagranitse.ru/journal.json?offset=";
+        private readonly string SEND_INFO = "http://m.nagranitse.ru/info.php?lang=ru";
         private bool _ExeptionThrown = false;
     }
 

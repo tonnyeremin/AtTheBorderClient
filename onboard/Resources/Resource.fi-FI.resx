@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="About" xml:space="preserve">
-    <value>noin programm</value>
+    <value>tietoja sovelluksesta</value>
   </data>
   <data name="AboutText" xml:space="preserve">
-    <value>Epävirallinen Mobile Client Venäjän verkkopalvelun nagranitce.ru. Näyttää liikenteen ja keskimääräinen odotusaika oli Venäjän- Suomen rajalla.</value>
+    <value>Epävirallinen venäläisen nagranitce.ru verkkopalvelun mobiilisovellus. Sovellus näyttää Venäjän ja Suomen välisen rajaliikenteen määrän ja keskimääräisen odotusajan raja-asemilla.</value>
   </data>
   <data name="AppTitle" xml:space="preserve">
     <value>RAJALLA</value>
@@ -139,16 +139,16 @@
     <value>perjantai</value>
   </data>
   <data name="FromRussiaTabHeader" xml:space="preserve">
-    <value>ja Venäjältä</value>
+    <value>Suomen suuntaan</value>
   </data>
   <data name="HoldText" xml:space="preserve">
-    <value>Pidä päivitykset</value>
+    <value>Pidä painettuna. Lataan uusia viestejä.</value>
   </data>
   <data name="Hour" xml:space="preserve">
     <value>t</value>
   </data>
   <data name="Journal" xml:space="preserve">
-    <value>päiväkirja</value>
+    <value>Viestit</value>
   </data>
   <data name="Min" xml:space="preserve">
     <value>min</value>
@@ -175,12 +175,27 @@
     <value>Torfyanovka</value>
   </data>
   <data name="ToRussiaTabHeader" xml:space="preserve">
-    <value>sisään Venäjältä</value>
+    <value>Venäjän suuntaan</value>
   </data>
   <data name="Tuesday" xml:space="preserve">
     <value>tiistai</value>
   </data>
   <data name="Wednesday" xml:space="preserve">
     <value>keskiviikko</value>
+  </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Palaute</value>
+  </data>
+  <data name="Rate" xml:space="preserve">
+    <value>Korko sovellus.</value>
+  </data>
+  <data name="SendRequest" xml:space="preserve">
+    <value>Parannusehdotukset</value>
+  </data>
+  <data name="Support" xml:space="preserve">
+    <value>Tuki</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Lähettää</value>
   </data>
 </root>

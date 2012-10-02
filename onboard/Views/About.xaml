@@ -6,13 +6,22 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:Onboard.Controls"
+    xmlns:models="clr-namespace:Onboard.ViewModels"
+    xmlns:local="clr-namespace:Onboard.Views"
+    xmlns:root="clr-namespace:Onboard"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type=models:AboutViewModel}"
     shell:SystemTray.IsVisible="True">
-    <Grid x:Name="LayoutRoot">
+    <phone:PhoneApplicationPage.Resources>
+        <models:AboutViewModel x:Key="ViewModel"/>
+       
+    </phone:PhoneApplicationPage.Resources>
+<Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -42,12 +51,17 @@
                        TextAlignment="Center"
                         Text="{Binding Path=Resources.DevName, Source={StaticResource LR}}"
                        HorizontalAlignment="Center"/>
-            <TextBlock TextWrapping="Wrap" 
-                       Foreground="{StaticResource PhoneSubtleBrush}"
-                       Margin="0,0"
-                       TextAlignment="Center"
-                       Text="an.eremin@gmail.com" 
-                       HorizontalAlignment="Center"/>
+
+            <controls:IconButton MinHeight="120"
+                Command="{Binding AppReviewCommand, Source={StaticResource ViewModel}}"
+                                 Icon="/Images/favs.png"
+                                 FirstLine="{Binding Path=Resources.Feedback, Source={StaticResource LR}}"
+                                 SecondLine="{Binding Path=Resources.Rate, Source={StaticResource LR}}"/>
+            <controls:IconButton MinHeight="120"
+                Command="{Binding SendFeedbackCommand, Source={StaticResource ViewModel}}"
+                                 Icon="/Images/mail.png"
+                                 FirstLine="{Binding Path=Resources.Support, Source={StaticResource LR}}"
+                                 SecondLine="{Binding Path=Resources.SendRequest, Source={StaticResource LR}}"/>
         </StackPanel>
     </Grid>
 </phone:PhoneApplicationPage>
